@@ -1,0 +1,28 @@
+//
+//  PrefixHeader.pch
+//  BeaconYun
+//
+//  Created by 樊芳 on 2018/12/4.
+//  Copyright © 2018 MinewTech. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import <SVProgressHUD.h>
+#import <Masonry.h>
+
+#import "BYCommonMacros.h"
+#import "BYCommonTools.h"
+#import "MinewModuleAPI.h"
+
+#define ScreenWidth  ([[UIScreen mainScreen] bounds].size.width)
+#define ScreenHeight  ([[UIScreen mainScreen] bounds].size.height)
+
+#define COLOR_RGBA(r,g,b,a) ([UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:a])
+#define COLOR_RGB(r,g,b) ([UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1])
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* PrefixHeader_pch */

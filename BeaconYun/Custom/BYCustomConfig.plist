@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Launch</key>
+	<dict>
+		<key>LaunchCopyright</key>
+		<string></string>
+		<key>LaunchBackgroundColor</key>
+		<string>#123456</string>
+		<key>LaunchLogoName</key>
+		<string>What the fuck</string>
+	</dict>
+	<key>NavigationBar</key>
+	<dict>
+		<key>Common</key>
+		<dict>
+			<key>backgroundColor</key>
+			<string>#EEEEEE</string>
+		</dict>
+		<key>MultiColor</key>
+		<dict>
+			<key>backgroundColor</key>
+			<string>#FFFFFF</string>
+		</dict>
+	</dict>
+</dict>
+</plist>
