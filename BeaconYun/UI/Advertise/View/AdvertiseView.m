@@ -46,7 +46,6 @@
                        @{@"icon":@"icon_Randomcolor",@"title":NSLocalizedString(@"强度加", nil)},
                        @{@"icon":@"icon_Randomcolor",@"title":NSLocalizedString(@"强度减", nil)},
                        @{@"icon":@"icon_Randomcolor",@"title":NSLocalizedString(@"加热", nil)},
-
                        nil];
     }
     if (!_totalsBtnArray) {
@@ -56,7 +55,6 @@
 
 - (void)initView {
 
-    
     _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
     [self addSubview:_scrollView];
     _scrollView.showsVerticalScrollIndicator = NO;
@@ -66,7 +64,6 @@
     [backImg setImage:[UIImage imageNamed:@"all_background"]];
     [_scrollView addSubview:backImg];
     
-
     if (ScreenHeight < 667) {
         _scrollView.contentSize = CGSizeMake(ScreenWidth, 667);
         backImg.frame = CGRectMake(0, 0, ScreenWidth, 667);
@@ -74,20 +71,19 @@
 
     
     UIImageView *phoneImgView = [[UIImageView alloc] init];
-    [self addSubview:phoneImgView];
+    [_scrollView addSubview:phoneImgView];
     [phoneImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.mas_top).offset(20);
+        make.top.equalTo(_scrollView.mas_top).offset(20);
         make.centerX.equalTo(self.mas_centerX);
         make.size.mas_equalTo(CGSizeMake(175, 175));
     }];
     [phoneImgView setImage:[UIImage imageNamed:@"icon_Shakeashake"]];
     
     NSInteger count = self.imageArray.count;
-    for (NSInteger i = 0; i <= count; i++) {
+    for (NSInteger i = 0; i < count; i++) {
         [self createImageView:i];
 
     }
-
 }
 
 - (UIView *)createImageView:(NSInteger)index
@@ -99,9 +95,9 @@
     CGFloat horSpacing = 54;
     CGFloat imageSpacing = (ScreenWidth - horSpacing*2-viewWidth*3)/2;
     
-    ShakeSelectView *shakeView = [[ShakeSelectView alloc] initWithFrame:CGRectMake(horSpacing+(viewWidth+imageSpacing)*(index%3), 50 + (viewHeight+verSpacing)*(index/3)+100, viewWidth, viewHeight)];
+    ShakeSelectView *shakeView = [[ShakeSelectView alloc] initWithFrame:CGRectMake(horSpacing+(viewWidth+imageSpacing)*(index%3), 50 + (viewHeight+verSpacing)*(index/3)+150, viewWidth, viewHeight)];
     if (index == _imageArray.count-1) {
-        shakeView.frame = CGRectMake(horSpacing+(viewWidth+imageSpacing)*2, 50 + (viewHeight+verSpacing)*(index/3), viewWidth, viewHeight);
+        shakeView.frame = CGRectMake((ScreenWidth-viewWidth)/2., 50 + (viewHeight+verSpacing)*(index/3)+150, viewWidth, viewHeight);
     }
     [self.totalsBtnArray addObject:shakeView.selButton];
     if (0 == index) {

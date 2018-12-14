@@ -10,15 +10,18 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "MinewCommonTool.h"
 
-#define sWriteUUIDs @[@"6E400002-B5A3-F393-E0A9-E50E24DCCA9E", @"FFF2"]
-#define sNotifyUUIDs @[@"6E400003-B5A3-F393-E0A9-E50E24DCCA9E", @"FFF1"]
-#define sServiceUUIDs @[@"6E400001-B5A3-F393-E0A9-E50E24DCCA9E", @"FFF0"]
+//#define sWriteUUIDs @[@"6E400002-B5A3-F393-E0A9-E50E24DCCA9E", @"FFF2"]
+//#define sNotifyUUIDs @[@"6E400003-B5A3-F393-E0A9-E50E24DCCA9E", @"FFF1"]
+//#define sServiceUUIDs @[@"6E400001-B5A3-F393-E0A9-E50E24DCCA9E", @"FFF0"]
+
+#define CharacterUUID @[@"0000fff6-0000-1000-8000-00805f9b34fb",@"FFF6"]
+#define SERVICEUUID @[@"0000fff3-0000-1000-8000-00805f9b34fb",@"FFF3"]
 
 @interface MinewModule()<CBPeripheralDelegate>
 
 @property (nonatomic, strong) CBCharacteristic *writeCharacteristic;
 
-@property (nonatomic, strong) CBCharacteristic *notifyCharacteristic;
+//@property (nonatomic, strong) CBCharacteristic *notifyCharacteristic;
 
 @end
 
@@ -32,13 +35,17 @@
 
 - (void)writeData:(NSData *)data hex:(BOOL)hex
 {
-    if (!_writeCharacteristic && _writeHandler)
-    {
-        _writeHandler(NO);
-        return ;
-    }
+//    if (!_writeCharacteristic && _writeHandler)
+//    {
+//        _writeHandler(NO);
+//        return ;
+//    }
     
-    [_peripheral writeValue:data forCharacteristic:_writeCharacteristic type:CBCharacteristicWriteWithResponse];
+    NSLog(@"_writeCharacteristic.UUID.UUIDString==%@",_writeCharacteristic.UUID.UUIDString);
+    if (_writeCharacteristic) {
+        [_peripheral writeValue:data forCharacteristic:_writeCharacteristic type:CBCharacteristicWriteWithoutResponse];
+
+    }
 }
 
 - (instancetype)initWithPeripheral:(CBPeripheral *)per infoDict:(NSDictionary *)info
@@ -73,16 +80,16 @@
 {
     NSInteger svcCount = peripheral.services.count;
     
-    if (svcCount != 1)
-    {
-        [self executeConnectionHandler:NO];
-        return ;
-    }
+//    if (svcCount != 1)
+//    {
+//        [self executeConnectionHandler:NO];
+//        return ;
+//    }
     
     
     for ( CBService *s in peripheral.services)
     {
-        if ([sServiceUUIDs indexOfObject:s.UUID.UUIDString])
+        if ([SERVICEUUID indexOfObject:s.UUID.UUIDString])
            [peripheral discoverCharacteristics:nil forService:s];
         else
             [self executeConnectionHandler:NO];
@@ -93,7 +100,7 @@
 {
     NSLog(@"++++%@", characteristic);
     
-    if ([_notifyCharacteristic.UUID.UUIDString isEqualToString:characteristic.UUID.UUIDString] && !error)
+    if ([_writeCharacteristic.UUID.UUIDString isEqualToString:characteristic.UUID.UUIDString] && !error)
     {
         if (_receiveHandler)
            _receiveHandler(characteristic.value);
@@ -110,14 +117,13 @@
 {
     for (CBCharacteristic *c in service.characteristics)
     {
-    
-        if ([sNotifyUUIDs indexOfObject:[c.UUID.UUIDString uppercaseString]] != NSNotFound)
+        NSLog(@"扫描到的character的特性==%@",c.UUID.UUIDString);
+        if ([CharacterUUID indexOfObject:[c.UUID.UUIDString uppercaseString]] != NSNotFound)
         {
            [peripheral setNotifyValue:YES forCharacteristic:c];
-            _notifyCharacteristic = c;
+            _writeCharacteristic = c;
+            
         }
-        else if ([sWriteUUIDs indexOfObject:[c.UUID.UUIDString uppercaseString]] != NSNotFound)
-                 _writeCharacteristic = c;
         
         [peripheral readValueForCharacteristic:c];
     }
@@ -127,7 +133,7 @@
         return ;
     
     
-    if (_writeCharacteristic && _notifyCharacteristic)
+    if (_writeCharacteristic)
         [self executeConnectionHandler:YES];
     else
         [self executeConnectionHandler:NO];
@@ -136,10 +142,10 @@
 - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
     NSLog(@"didWriteValueForCharacteristic Error:%@", error);
-    if ( [_writeCharacteristic.UUID.UUIDString isEqualToString:characteristic.UUID.UUIDString] && _writeHandler)
-    {
-        _writeHandler(error? NO: YES);
-    }
+//    if ( [_writeCharacteristic.UUID.UUIDString isEqualToString:characteristic.UUID.UUIDString] && _writeHandler)
+//    {
+//        _writeHandler(error? NO: YES);
+//    }
 }
 
 - (void)executeConnectionHandler:(BOOL)connected

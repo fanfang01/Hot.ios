@@ -148,9 +148,15 @@ static NSInteger scanCount;
     [api connect:nil completion:^(id result, BOOL keepAlive) {
         if ([((NSDictionary *)result)[@"state"] integerValue])
         {
-            [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"成功连接设备:%@",module.name]];
-            
-            [self scanSucessSkipToNextVC];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (scanCount == 0) {
+                    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"成功连接设备:%@",module.name]];
+                    
+                    [self scanSucessSkipToNextVC];
+                    scanCount ++;
+                }
+            });
+
             return ;
         }
 
@@ -202,15 +208,8 @@ static NSInteger scanCount;
             if (scanCount == 0) {
                 [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"成功扫描到设备%@",module.name]];
                 
-                //                [weakSelf.manager stopScan];
-                
-                //                if ([module.name isEqualToString:@"HToy"]) {
-//                [weakSelf scanSucessSkipToNextVC];
                 //连接搜索的设备
                 [strongSelf connectToModules:module];
-                scanCount ++;
-                
-                //                }
                 
             }
         });
@@ -290,7 +289,18 @@ static NSInteger scanCount;
     switch (status) {
         case LinkStatusConnected:
         {
-            [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"成功连接上设备:%@",module.name]];
+            if (scanCount == 0) {
+                
+                [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"成功连接上设备:%@",module.name]];
+                
+                [self scanSucessSkipToNextVC];
+                scanCount ++;
+                
+                //2s后提示消失
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [SVProgressHUD dismiss];
+                });
+            }
             
         }
             break;
