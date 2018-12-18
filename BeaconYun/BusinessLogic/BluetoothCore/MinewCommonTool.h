@@ -34,4 +34,7 @@
 // calculate distance by a rssi value
 + (float)distanceByRSSI:(NSInteger)rssi;
 
+#pragma mark ---- 16进制字符串 转NSData
++ (NSData *)hexString:(NSString *)hexString;
+
 @end

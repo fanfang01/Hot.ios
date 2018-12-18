@@ -216,7 +216,6 @@
     
     NSLog(@"1111扫描到的数据::::%@",advertisementData);
 
-    
     NSString *serviceuuid = [NSString stringWithFormat:@"%@", [adverDataDict.allKeys firstObject]];
     
     NSUInteger index = [SERVICEUUID indexOfObject:service];

@@ -114,6 +114,7 @@ WX_EXPORT_METHOD(@selector(getLanguage:))
     };
 }
 
+//hex  是否是 16进制
 - (void)sendData:(NSString *)data hex:(BOOL)hex completion:(WXModuleKeepAliveCallback)handler
 {
     NSLog(@"++INS:%@, hex:%d", data, hex);

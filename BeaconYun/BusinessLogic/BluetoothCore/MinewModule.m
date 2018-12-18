@@ -35,13 +35,8 @@
 
 - (void)writeData:(NSData *)data hex:(BOOL)hex
 {
-//    if (!_writeCharacteristic && _writeHandler)
-//    {
-//        _writeHandler(NO);
-//        return ;
-//    }
-    
     NSLog(@"_writeCharacteristic.UUID.UUIDString==%@",_writeCharacteristic.UUID.UUIDString);
+
     if (_writeCharacteristic) {
         [_peripheral writeValue:data forCharacteristic:_writeCharacteristic type:CBCharacteristicWriteWithoutResponse];
 
@@ -78,14 +73,13 @@
 
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error
 {
-    NSInteger svcCount = peripheral.services.count;
+//    NSInteger svcCount = peripheral.services.count;
     
 //    if (svcCount != 1)
 //    {
 //        [self executeConnectionHandler:NO];
 //        return ;
 //    }
-    
     
     for ( CBService *s in peripheral.services)
     {
@@ -132,7 +126,6 @@
     if (!_connectionHandler)
         return ;
     
-    
     if (_writeCharacteristic)
         [self executeConnectionHandler:YES];
     else
@@ -156,8 +149,6 @@
         _connectionHandler(dict, self);
     }
 }
-
-
 
 #pragma mark ***********************************Setter
 - (void)setPeripheral:(CBPeripheral *)peripheral
