@@ -48,6 +48,8 @@
 		28D3876321C2540200BC3003 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD07BA21B7A3740020D7A9 /* libc++.tbd */; };
 		28D3876521C2540B00BC3003 /* libiconv.2.4.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D3876421C2540B00BC3003 /* libiconv.2.4.0.tbd */; };
 		28D3876721C2541600BC3003 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D3876621C2541600BC3003 /* libsqlite3.0.tbd */; };
+		28FE6DEF21C8DFE1008ED44F /* WakeUpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FE6DEC21C8DFE1008ED44F /* WakeUpManager.m */; };
+		28FE6DF021C8DFE1008ED44F /* RecognizeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FE6DEE21C8DFE1008ED44F /* RecognizeManager.m */; };
 		9CC424E713553F17D2376CFE /* libPods-BeaconYun.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00AD531C7A5248BA149154C2 /* libPods-BeaconYun.a */; };
 		E53E94CB1E6526FB0047D49A /* BYSetDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E53E94CA1E6526FB0047D49A /* BYSetDeviceViewController.m */; };
 		E54070101E97320100D9ECB4 /* WXImgLoaderDefaultImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = E540700F1E97320100D9ECB4 /* WXImgLoaderDefaultImpl.m */; };
@@ -170,6 +172,10 @@
 		28FD07C621B7A3B40020D7A9 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		28FD07C821B7A3C90020D7A9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		28FD07CA21B7A3D10020D7A9 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		28FE6DEB21C8DFE1008ED44F /* RecognizeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecognizeManager.h; sourceTree = "<group>"; };
+		28FE6DEC21C8DFE1008ED44F /* WakeUpManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WakeUpManager.m; sourceTree = "<group>"; };
+		28FE6DED21C8DFE1008ED44F /* WakeUpManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WakeUpManager.h; sourceTree = "<group>"; };
+		28FE6DEE21C8DFE1008ED44F /* RecognizeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecognizeManager.m; sourceTree = "<group>"; };
 		49E0A3CD57A1B7DE50179925 /* Pods-BeaconYun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeaconYun.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeaconYun/Pods-BeaconYun.debug.xcconfig"; sourceTree = "<group>"; };
 		B370C1B698562C91509A8E8F /* Pods-BeaconYun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeaconYun.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeaconYun/Pods-BeaconYun.release.xcconfig"; sourceTree = "<group>"; };
 		E53E94C91E6526FB0047D49A /* BYSetDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYSetDeviceViewController.h; sourceTree = "<group>"; };
@@ -406,6 +412,7 @@
 		2864A2DF21C2363600D3B088 /* Advertise */ = {
 			isa = PBXGroup;
 			children = (
+				28FE6DEA21C8DFE1008ED44F /* Model */,
 				2864A2EA21C2363600D3B088 /* View */,
 			);
 			path = Advertise;
@@ -434,6 +441,17 @@
 				28AA916721B11E9F008A0156 /* MTPeripheralManagerEx.h */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		28FE6DEA21C8DFE1008ED44F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				28FE6DEB21C8DFE1008ED44F /* RecognizeManager.h */,
+				28FE6DEE21C8DFE1008ED44F /* RecognizeManager.m */,
+				28FE6DED21C8DFE1008ED44F /* WakeUpManager.h */,
+				28FE6DEC21C8DFE1008ED44F /* WakeUpManager.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		4A16B165B91471A682D1289E /* Frameworks */ = {
@@ -879,10 +897,12 @@
 				E545202A1E67FFB700C0D46E /* MinewCommonTool.m in Sources */,
 				E54520301E68000000C0D46E /* MinewModuleAPI.m in Sources */,
 				2864A2F621C2363600D3B088 /* AdvertiseView.m in Sources */,
+				28FE6DEF21C8DFE1008ED44F /* WakeUpManager.m in Sources */,
 				E53E94CB1E6526FB0047D49A /* BYSetDeviceViewController.m in Sources */,
 				28AA916A21B11E9F008A0156 /* MTPeripheralManager.m in Sources */,
 				E56992F11E5EB97100C76E42 /* BYCustomManager.m in Sources */,
 				E5BF8E721EB040A300AF94DC /* ColorPickerView.m in Sources */,
+				28FE6DF021C8DFE1008ED44F /* RecognizeManager.m in Sources */,
 				2864A2F121C2363600D3B088 /* BYTableViewModel.m in Sources */,
 				E56992F21E5EB97100C76E42 /* BYBindDeviceViewController.m in Sources */,
 				E56992DC1E5EB91500C76E42 /* AppDelegate.m in Sources */,

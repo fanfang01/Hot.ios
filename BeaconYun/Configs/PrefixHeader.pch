@@ -12,11 +12,20 @@
 #import <SVProgressHUD.h>
 #import <Masonry.h>
 
-#import "BYCommonMacros.h"
 #import "BYCommonTools.h"
 #import "MinewModuleAPI.h"
 #import "MinewModule.h"
 #import "MinewCommonTool.h"
+
+#import "BDSEventManager.h"
+#import "BDSASRDefines.h"
+#import "BDSASRParameters.h"
+#import "BDSWakeupDefines.h"
+#import "BDSWakeupParameters.h"
+
+#define API_KEY @"tyiwdzbYQ9GTmfaGPTqAuXtB"
+#define SECRET_KEY @"ooDetcOCZyUyTYdtWpsXgG4iw3zih1aH"
+#define APP_ID @"15058256"
 
 #define ScreenWidth  ([[UIScreen mainScreen] bounds].size.width)
 #define ScreenHeight  ([[UIScreen mainScreen] bounds].size.height)
