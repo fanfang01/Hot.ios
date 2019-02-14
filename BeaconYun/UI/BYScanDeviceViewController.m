@@ -50,7 +50,6 @@
 // iPhone bind device mac Address
 @implementation BYScanDeviceViewController
 {
-    UITextField *_contentTF;
     NSString *_testString;
     NSString *_deviceName;
     UIImageView *_scanBGImageView;
@@ -64,15 +63,10 @@ static NSInteger scanCount;
 {
     [super viewDidLoad];
     
-//    if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)]) {
-//        self.edgesForExtendedLayout = UIRectEdgeNone;
-//    }
     scanCount = 0;
     [self initGUI];
     [self initCore];
     
-    //add notification for keyBoard
-    [self addNoticeForKeyboard];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -98,21 +92,20 @@ static NSInteger scanCount;
 
 - (void)initGUI
 {
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(startToSetup)];
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(startToSetup)];
 
     UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
-    backgroundImageView.image = [UIImage imageNamed:@"all_background"];
+    backgroundImageView.image = [UIImage imageNamed:@"bg"];
     [self.view addSubview:backgroundImageView];
     
     
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 60)];
-    _titleLabel = titleLabel;
+    UILabel *hintLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, ScreenWidth, 60)];
+    _titleLabel = hintLabel;
 
-    titleLabel.center = CGPointMake(ScreenWidth/2, 70);
-    titleLabel.text = @"使用前请先打开手机蓝牙";
-    titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.textColor = COLOR_RGBA(160, 160, 160, 1);
-    [self.view addSubview:titleLabel];
+    hintLabel.text = @"使用前请先打开手机蓝牙";
+    hintLabel.textAlignment = NSTextAlignmentCenter;
+    hintLabel.textColor = COLOR_RGBA(160, 160, 160, 1);
+    [self.view addSubview:hintLabel];
     
     UIImageView *scanBGImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
     scanBGImageView.userInteractionEnabled = NO;
@@ -314,61 +307,6 @@ static NSInteger scanCount;
 {
     BYInfoViewController *bvc = [[BYInfoViewController alloc]init];
     [self.navigationController pushViewController:bvc animated:YES];
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [_contentTF resignFirstResponder];
-    return YES;
-}
-
-
-#pragma mark - 键盘通知
-- (void)addNoticeForKeyboard {
-    
-    //注册键盘出现的通知
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShow:)
-                                                 name:UIKeyboardWillShowNotification object:nil];
-    //注册键盘消失的通知
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHide:)
-                                                 name:UIKeyboardWillHideNotification object:nil];
-}
-
-///键盘显示事件
-- (void) keyboardWillShow:(NSNotification *)notification {
-    //获取键盘高度，在不同设备上，以及中英文下是不同的
-    CGFloat kbHeight = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
-    
-    //计算出键盘顶端到inputTextView panel底端的距离(加上自定义的缓冲距离INTERVAL_KEYBOARD)
-    CGFloat offset = (_contentTF.frame.origin.y+_contentTF.frame.size.height+INTERVAL_KEYBOARD) - (self.view.frame.size.height - kbHeight);
-    
-    // 取得键盘的动画时间，这样可以在视图上移的时候更连贯
-    double duration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    
-    //将视图上移计算好的偏移
-    if(offset > 0) {
-        [UIView animateWithDuration:duration animations:^{
-            self.view.frame = CGRectMake(0.0f, -offset, self.view.frame.size.width, self.view.frame.size.height);
-        }];
-    }
-}
-
-///键盘消失事件
-- (void) keyboardWillHide:(NSNotification *)notify {
-    // 键盘动画时间
-    double duration = [[notify.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    
-    //视图下沉恢复原状
-    [UIView animateWithDuration:duration animations:^{
-        self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-    }];
-}
-
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    [_contentTF resignFirstResponder];
 }
 
 #pragma mark - animation

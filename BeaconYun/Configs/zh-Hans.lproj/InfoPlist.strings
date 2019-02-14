@@ -6,6 +6,6 @@
   Copyright © 2017 MinewTech. All rights reserved.
 */
 
-"CFBundleDisplayName" = "BLE lock";
+"CFBundleDisplayName" = "智能风扇";
 
 "NSBluetoothPeripheralUsageDescription" = "App需要使用蓝牙来和设备端通信";

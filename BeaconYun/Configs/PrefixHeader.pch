@@ -27,6 +27,8 @@
 #define SECRET_KEY @"ooDetcOCZyUyTYdtWpsXgG4iw3zih1aH"
 #define APP_ID @"15058256"
 
+#define statusBarHeight [[UIApplication sharedApplication] statusBarFrame].size.height
+
 #define ScreenWidth  ([[UIScreen mainScreen] bounds].size.width)
 #define ScreenHeight  ([[UIScreen mainScreen] bounds].size.height)
 

@@ -28,11 +28,14 @@
 
 - (void)preSettings
 {
-    NSDictionary *settings = [BYCustomManager getCustomNavSettings:@"Common"];
-    self.navigationBar.backgroundColor = [BYCommonTools colorWithRgb:settings[@"backgroundColor"]];
-    self.navigationItem.leftBarButtonItem.tintColor = [BYCommonTools colorWithRgb:@"#eeeeee"];
-    self.navigationItem.rightBarButtonItem.tintColor = [BYCommonTools colorWithRgb:@"#eeeeee"];
-    self.navigationBar.tintColor = [BYCommonTools colorWithRgb:@"#000000"];
+//    NSDictionary *settings = [BYCustomManager getCustomNavSettings:@"Common"];
+//    self.navigationBar.backgroundColor = [BYCommonTools colorWithRgb:settings[@"backgroundColor"]];
+    self.navigationBar.barTintColor = COLOR_RGB(0, 88, 85);
+
+//    self.navigationItem.leftBarButtonItem.tintColor = [BYCommonTools colorWithRgb:@"#eeeeee"];
+//    self.navigationItem.rightBarButtonItem.tintColor = [BYCommonTools colorWithRgb:@"#eeeeee"];
+//    self.navigationBar.tintColor = [BYCommonTools colorWithRgb:@"#000000"];
+//    self.navigationBar.tintColor = [UIColor colorWithRed:0/255 green:88/255 blue:85/255 alpha:1];
 }
 
 - (void)addLeftItem:(UIBarButtonItem *)item push:(ItemPushedBlock)handler

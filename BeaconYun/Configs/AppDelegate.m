@@ -25,12 +25,13 @@
 {
     BYScanDeviceViewController *dvc = [[BYScanDeviceViewController alloc]init];
     BYNavigationController *nvc = [[BYNavigationController alloc]initWithRootViewController:dvc];
-    nvc.navigationBar.barTintColor = [UIColor colorWithRed:0.20 green:0.20 blue:0.20 alpha:1.00];
-    nvc.navigationBar.translucent = NO;
-    nvc.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
-    nvc.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
-    nvc.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
-    nvc.navigationBar.tintColor = [UIColor whiteColor];
+//    nvc.navigationBar.barTintColor = [UIColor colorWithRed:0/255 green:88/255 blue:85/255 alpha:1];
+////    nvc.navigationBar.backgroundColor = [UIColor colorWithRed:0/255 green:88/255 blue:85/255 alpha:1];
+//    nvc.navigationBar.translucent = NO;
+//    nvc.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
+//    nvc.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
+//    nvc.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
+//    nvc.navigationBar.tintColor = [UIColor whiteColor];
     
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     self.window.rootViewController = nvc;
@@ -38,6 +39,8 @@
     [self.window makeKeyAndVisible];
     
     [MinewModuleAPI sharedInstance];
+    
+    
 
 //    [self initWeexSDK];
 
